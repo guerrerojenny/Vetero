@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import Header from './components/Header.vue';
-import Menu from './components/Menu.vue';
-import Content from './components/Content.vue';
+import Header from './components/PageHeader.vue';
+import Menu from './components/TabsMenu.vue';
+import Content from './components/MainContent.vue';
 
 export default {
   components: {
