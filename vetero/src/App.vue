@@ -1,27 +1,91 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-
+  <div class="app-container">
+    <Header />
+    <div class="main-layout">
+      <div class="left-column">
+        <div class="menu-container">
+          <Menu @menu-selected="updateContent" />
+        </div>
+        <div class="extra-space">
+          <!-- You can add other left column content here -->
+        </div>
+      </div>
+      <div class="right-column">
+        <Content :selectedContent="selectedContent" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue';
+import Menu from './components/Menu.vue';
+import Content from './components/Content.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    Header,
+    Menu,
+    Content
+  },
+  data() {
+    return {
+      selectedContent: 'Outfit of the day'
+    };
+  },
+  methods: {
+    updateContent(content) {
+      this.selectedContent = content;
+    }
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.app-container {
+  font-family: Arial, sans-serif;
+  padding: 0 5%;
+}
+
+.main-layout {
+  display: flex;
+  margin-top: 20px;
+}
+
+.left-column {
+  flex: 1;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-container {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.extra-space {
+  flex: 2;
+}
+
+.right-column {
+  flex: 3;
+  padding-left: 20px;
+}
+
+.main-layout > div {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .left-column {
+    flex: 1;
+  }
+
+  .right-column {
+    flex: 3;
+  }
 }
 </style>
