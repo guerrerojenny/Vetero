@@ -23,17 +23,11 @@
   <script>
  
   export default {
-    data() {
-    return {
-      selectedTab: 'Outfit of the day'
-    };
-  },
-  methods: {
-    selectContent(tab) {
-      this.selectedTab = tab;
+    methods: {
+      selectContent(content) {
+        this.$emit('menu-selected', content);
+      }
     }
-  },
-    name: 'PageHeader'
   };
   </script>
   

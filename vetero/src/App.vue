@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <PageHeader />
+    <PageHeader @menu-selected="updateContent"/>
     <div class="main-layout">
       <div class="left-column">
         <div class="menu-container">
