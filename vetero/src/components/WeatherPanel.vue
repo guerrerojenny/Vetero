@@ -1,6 +1,7 @@
 <template>
     <div class="weather-panel">
       <h1>Today's Weather</h1>
+      <h1>{{ AverageTemp }}</h1>
       <!--Icon
       // <img alt="Weather Icon" src="getWeatherIcon(iconPhrase)">
       // Avg temp
@@ -12,6 +13,11 @@
   
   <script>
   export default {
+    data() {
+    return {
+      myParagraph: 'This is the initial paragraph text.'
+    };
+  },
     /*
     props: {
       iconPhrase: {
