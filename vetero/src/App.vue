@@ -1,21 +1,18 @@
 <template>
-  <PageHeader />
-  <TabsMenu />
-  <MainContent />
 
   <div class="app-container">
-    <Header />
+    <PageHeader />
     <div class="main-layout">
       <div class="left-column">
         <div class="menu-container">
-          <Menu @menu-selected="updateContent" />
+          <TabsMenu @menu-selected="updateContent" />
         </div>
         <div class="extra-space">
           <!-- You can add other left column content here -->
         </div>
       </div>
       <div class="right-column">
-        <Content :selectedContent="selectedContent" />
+        <MainContent :selectedContent="selectedContent" />
       </div>
     </div>
   </div>
