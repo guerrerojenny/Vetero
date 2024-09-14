@@ -18,15 +18,15 @@
 </template>
 
 <script>
-import Header from './components/PageHeader.vue';
-import Menu from './components/TabsMenu.vue';
-import Content from './components/MainContent.vue';
+import PageHeader from './components/PageHeader.vue';
+import TabsMenu from './components/TabsMenu.vue';
+import MainContent from './components/MainContent.vue';
 
 export default {
   components: {
-    Header,
-    Menu,
-    Content
+    PageHeader,
+    TabsMenu,
+    MainContent
   },
   data() {
     return {
