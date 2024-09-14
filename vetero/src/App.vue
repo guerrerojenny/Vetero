@@ -1,5 +1,4 @@
 <template>
-
   <div class="app-container">
     <PageHeader />
     <div class="main-layout">
@@ -8,32 +7,49 @@
           <TabsMenu @menu-selected="updateContent" />
         </div>
         <div class="extra-space">
-          <!-- You can add other left column content here -->
         </div>
       </div>
       <div class="right-column">
-        <MainContent :selectedContent="selectedContent" />
+        <component :is="currentComponent" />
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
 import PageHeader from './components/PageHeader.vue';
 import TabsMenu from './components/TabsMenu.vue';
-import MainContent from './components/MainContent.vue';
+import WardrobePanel from './components/WardrobePanel.vue';
+import OutfitPanel from './components/OutfitPanel.vue';
+import FeedbackPanel from './components/FeedbackPanel.vue';
+
 
 export default {
   components: {
     PageHeader,
     TabsMenu,
-    MainContent
+    WardrobePanel,
+    FeedbackPanel,
+    OutfitPanel
   },
   data() {
     return {
       selectedContent: 'Outfit of the day'
     };
+  },
+  computed: {
+    currentComponent() {
+      switch (this.selectedContent) {
+        case 'Outfit of the day':
+          return 'OutfitPanel';
+        case 'Wardrobe':
+          return 'WardrobePanel';
+        case 'Feedback':
+          return 'FeedbackPanel';
+        default:
+          return null;
+      }
+    }
   },
   methods: {
     updateContent(content) {
@@ -42,6 +58,9 @@ export default {
   }
 };
 </script>
+
+
+
 
 <style scoped>
 .app-container {
