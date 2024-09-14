@@ -1,21 +1,27 @@
 <template>
-  <div class="content">
-    <h2>{{ selectedContent }}</h2>
-    <p v-if="selectedContent === 'Outfit of the day'">Content for outfit of the day.</p>
-    <p v-if="selectedContent === 'Wardrobe'">Content for wardrobe.</p>
-    <p v-if="selectedContent === 'Feedback'">Content for feedback.</p>
-  </div>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
+
 </template>
 
 <script>
+import HelloWorld from './components/HelloWorld.vue'
+
 export default {
-  props: ['selectedContent']
-};
+  name: 'App',
+  components: {
+    HelloWorld
+  }
+}
 </script>
 
-<style scoped>
-.content {
-  font-size: 18px;
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
-
