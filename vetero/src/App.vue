@@ -4,7 +4,7 @@
     <div class="main-layout">
       <div class="left-column">
         <div class="menu-container">
-          <TabsMenu @menu-selected="updateContent" />
+          <WeatherPanel  />
         </div>
         <div class="extra-space">
         </div>
@@ -18,7 +18,7 @@
 
 <script>
 import PageHeader from './components/PageHeader.vue';
-import TabsMenu from './components/TabsMenu.vue';
+import WeatherPanel from './components/WeatherPanel.vue';
 import WardrobePanel from './components/WardrobePanel.vue';
 import OutfitPanel from './components/OutfitPanel.vue';
 import FeedbackPanel from './components/FeedbackPanel.vue';
@@ -27,7 +27,7 @@ import FeedbackPanel from './components/FeedbackPanel.vue';
 export default {
   components: {
     PageHeader,
-    TabsMenu,
+    WeatherPanel,
     WardrobePanel,
     FeedbackPanel,
     OutfitPanel
