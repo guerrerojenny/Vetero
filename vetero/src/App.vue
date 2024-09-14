@@ -1,4 +1,8 @@
 <template>
+  <PageHeader />
+  <TabsMenu />
+  <MainContent />
+
   <div class="app-container">
     <Header />
     <div class="main-layout">
@@ -15,6 +19,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
