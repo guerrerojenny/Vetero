@@ -6,11 +6,11 @@
       <div class="box">
         <div class="box-header">
           <h2>Shirts</h2>
-          <button @click="addItem('shirt')">+</button>
+          <button @click="openModal('shirt')">+</button>
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in shirt" :key="index">{{ item }}</div>
+            <div class="item" v-for="(item, index) in shirt" :key="index" >{{ item }}</div>
           </div>
         </div>
       </div>
@@ -123,11 +123,17 @@
         </div>
       </div>
     </div>
+    <AddItemModal :isVisible="modalVisible" @close="closeModal" @submit="addItemToCategory" />
   </div>
 </template>
 
 <script>
+import AddItemModal from './AddItemModal.vue'; // Import the modal component
+
 export default {
+  components: {
+    AddItemModal
+  },
   data() {
     return {
       shirt: [],
@@ -139,17 +145,24 @@ export default {
       outerleg: [],
       hat: [],
       gloves: [],
-      socks: []
+      socks: [],
+      modalVisible: false,
+      currentCategory: ''
     };
   },
   methods: {
-    addItem(category) {
-      const item = prompt('Enter the item name:');
-      if (item) {
-        this[category].push(item);
-      } else if (!item) {
-        alert('Item name cannot be empty.');
+    openModal(category) {
+      this.currentCategory = category;
+      this.modalVisible = true;
+    },
+    closeModal() {
+      this.modalVisible = false;
+    },
+    addItemToCategory(itemName) {
+      if (this.currentCategory) {
+        this[this.currentCategory].push(itemName);
       }
+      this.closeModal();
     }
   }
 };
