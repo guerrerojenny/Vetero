@@ -4,7 +4,9 @@
     <div class="main-layout">
       <div class="left-column">
         <div class="menu-container">
-          <WeatherPanel  />
+          <WeatherPanel iconPhrase="Sunny"
+           :avgTemperature="30" 
+           :avgPrecipitation="5"/>
         </div>
         <div class="extra-space">
         </div>
