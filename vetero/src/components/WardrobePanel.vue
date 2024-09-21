@@ -123,12 +123,12 @@
         </div>
       </div>
     </div>
-    <AddItemModal :isVisible="modalVisible" @close="closeModal" @submit="addItemToCategory" />
+    <AddItemModal :isVisible="modalVisible" isEdit="isItemEdit" @close="closeModal" @submit="addItemToCategory" />
   </div>
 </template>
 
 <script>
-import AddItemModal from './AddItemModal.vue'; // Import the modal component
+import AddItemModal from './AddItemModal.vue';
 
 export default {
   components: {
@@ -147,6 +147,7 @@ export default {
       gloves: [],
       socks: [],
       modalVisible: false,
+      isItemEdit: false,
       currentCategory: ''
     };
   },
@@ -157,6 +158,9 @@ export default {
     },
     closeModal() {
       this.modalVisible = false;
+    },
+    editItem() {
+      this.isItemEdit = true;
     },
     addItemToCategory(itemInfo) {
       if (this.currentCategory) {

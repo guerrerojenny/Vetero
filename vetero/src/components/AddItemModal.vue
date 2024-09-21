@@ -46,7 +46,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="classification"><label for="heatPoints">Heat Points:</label>
+                <div v-if="!isEdit" class="classification"><label for="heatPoints">Heat Points:</label>
                     <select id="amount" v-model="itemHeatPoints">
                         <option disabled value="">Please select one</option>
                         <option v-for="n in heatPointsNumbers" :key="n" :value="n">{{ n }}</option>
@@ -64,7 +64,8 @@
 <script>
 export default {
     props: {
-        isVisible: Boolean
+        isVisible: Boolean,
+        isEdit: Boolean
     },
     data() {
         return {
