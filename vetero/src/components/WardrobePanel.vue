@@ -158,9 +158,9 @@ export default {
     closeModal() {
       this.modalVisible = false;
     },
-    addItemToCategory(itemName) {
+    addItemToCategory(itemInfo) {
       if (this.currentCategory) {
-        this[this.currentCategory].push(itemName);
+        this[this.currentCategory].push(itemInfo.itemName);
       }
       this.closeModal();
     }

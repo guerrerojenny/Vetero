@@ -14,11 +14,11 @@
                 <div class="classification"><label for="amount">Amount:</label>
                     <select id="amount" v-model="itemAmount">
                         <option disabled value="">Please select one</option>
-                        <option v-for="n in numbers" :key="n" :value="n">{{ n }}</option>
+                        <option v-for="n in amountNumbers" :key="n" :value="n">{{ n }}</option>
                     </select>
                 </div>
                 <div class="classification"><label for="season">Season:</label>
-                    <select v-model="selected">
+                    <select v-model="itemSeason">
                         <option disabled value="">Please select one</option>
                         <option>Spring</option>
                         <option>Summer</option>
@@ -46,6 +46,12 @@
                         </label>
                     </div>
                 </div>
+                <div class="classification"><label for="heatPoints">Heat Points:</label>
+                    <select id="amount" v-model="itemHeatPoints">
+                        <option disabled value="">Please select one</option>
+                        <option v-for="n in heatPointsNumbers" :key="n" :value="n">{{ n }}</option>
+                    </select>
+                </div>
 
             </div>
             <div class="modal-footer">
@@ -64,10 +70,13 @@ export default {
         return {
             itemName: '',
             itemAmount: '',
-            selected: '',
+            itemSeason: '',
             isWaterproof: '',
             needsWash: '',
-            numbers: Array.from({ length: 15 }, (_, i) => i + 1)
+            itemHeatPoints: '',
+            amountNumbers: Array.from({ length: 15 }, (_, i) => i + 1) ,
+            heatPointsNumbers: Array.from({ length: 7 }, (_, i) => i + 1)
+
         };
     },
     methods: {
@@ -76,19 +85,20 @@ export default {
             this.resetFields();
         },
         submit() {
-            if (!this.itemName || !this.itemAmount || !this.selected || !this.isWaterproof || !this.needsWash) {
+            if (!this.itemName || !this.itemAmount || !this.itemSeason || !this.isWaterproof || !this.needsWash || !this.itemHeatPoints) {
                 alert('Please fill in all fields.');
             } else {
-                this.$emit('submit', this.itemName);
+                this.$emit('submit', {itemName: this.itemName, itemAmount: this.itemAmount, itemSeason: this.itemSeason, itemWaterproof: this.isWaterproof, itemWash: this.needsWash, itemHeatPoints: this.itemHeatPoints});
                 this.closeModal();
             }
         },
         resetFields() {
             this.itemName = '';
             this.itemAmount = '';
-            this.selected = '';
+            this.itemSeason = '';
             this.isWaterproof = '';
             this.needsWash = '';
+            this.itemHeatPoints = '';
         }
     }
 };
