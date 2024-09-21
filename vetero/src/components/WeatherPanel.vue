@@ -14,11 +14,6 @@
   
   <script>
   export default {
-    data() {
-    return {
-      myParagraph: 'This is the initial paragraph text.'
-    };
-  },
     props: {
       iconPhrase: {
         type: String,
