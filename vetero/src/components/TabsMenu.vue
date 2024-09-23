@@ -35,7 +35,6 @@ export default {
   justify-content: space-around;
   background-color: #f0f0f0;
   padding: 10px;
-  border-bottom: 2px solid #ccc;
 }
 
 .menu p {
