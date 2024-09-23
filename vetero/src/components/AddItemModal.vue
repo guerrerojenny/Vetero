@@ -8,17 +8,17 @@
             </div>
             <div class="modal-body">
                 <div class="classification"><label for="name">Name:</label>
-                    <input type="text" id="name" v-model="itemName" placeholder="Enter item name">
+                    <input type="text" id="name" v-model="localItemInfo.itemName" placeholder="Enter item name">
                 </div>
 
                 <div class="classification"><label for="amount">Amount:</label>
-                    <select id="amount" v-model="itemAmount">
+                    <select id="amount" v-model="localItemInfo.itemAmount">
                         <option disabled value="">Please select one</option>
                         <option v-for="n in amountNumbers" :key="n" :value="n">{{ n }}</option>
                     </select>
                 </div>
                 <div class="classification"><label for="season">Season:</label>
-                    <select v-model="itemSeason">
+                    <select v-model="localItemInfo.itemSeason">
                         <option disabled value="">Please select one</option>
                         <option>Spring</option>
                         <option>Summer</option>
@@ -29,25 +29,25 @@
                 <div class="classification"><label>Waterproof:</label>
                     <div class="checkbox-group">
                         <label>
-                            <input type="radio" v-model="isWaterproof" value="yes"> Yes
+                            <input type="radio" v-model="localItemInfo.isWaterproof" value="yes"> Yes
                         </label>
                         <label>
-                            <input type="radio" v-model="isWaterproof" value="no"> No
+                            <input type="radio" v-model="localItemInfo.isWaterproof" value="no"> No
                         </label>
                     </div>
                 </div>
                 <div class="classification"><label>Requires wash after 1 use:</label>
                     <div class="checkbox-group">
                         <label>
-                            <input type="radio" v-model="needsWash" value="yes"> Yes
+                            <input type="radio" v-model="localItemInfo.needsWash" value="yes"> Yes
                         </label>
                         <label>
-                            <input type="radio" v-model="needsWash" value="no"> No
+                            <input type="radio" v-model="localItemInfo.needsWash" value="no"> No
                         </label>
                     </div>
                 </div>
                 <div v-if="!isEdit" class="classification"><label for="heatPoints">Heat Points:</label>
-                    <select id="amount" v-model="itemHeatPoints">
+                    <select id="amount" v-model="localItemInfo.itemHeatPoints">
                         <option disabled value="">Please select one</option>
                         <option v-for="n in heatPointsNumbers" :key="n" :value="n">{{ n }}</option>
                     </select>
@@ -65,41 +65,77 @@
 export default {
     props: {
         isVisible: Boolean,
-        isEdit: Boolean
+        isEdit: Boolean,
+        itemInfo: {
+            type: Object,
+            default: () => ({
+                itemName: '',
+                itemAmount: '',
+                itemSeason: '',
+                itemWaterproof: '',
+                itemWash: '',
+                itemHeatPoints: ''
+            })
+        }
     },
     data() {
         return {
-            itemName: '',
-            itemAmount: '',
-            itemSeason: '',
-            isWaterproof: '',
-            needsWash: '',
-            itemHeatPoints: '',
-            amountNumbers: Array.from({ length: 15 }, (_, i) => i + 1) ,
+            localItemInfo: this.isEdit ? { ...this.itemInfo } : this.getDefaultItemInfo(), 
+            amountNumbers: Array.from({ length: 15 }, (_, i) => i + 1),
             heatPointsNumbers: Array.from({ length: 7 }, (_, i) => i + 1)
-
         };
+    }, watch: {
+        isVisible(newVal) {
+            if (newVal) {
+                console.log("in watch isEdit: "+ this.isEdit);
+                this.localItemInfo = this.isEdit ? { ...this.itemInfo } : this.getDefaultItemInfo(); // Reset based on isEdit
+            }
+        }
     },
     methods: {
+        getDefaultItemInfo() {
+            return {
+                itemName: '',
+                itemAmount: '',
+                itemSeason: '',
+                isWaterproof: '',
+                needsWash: '',
+                itemHeatPoints: ''
+            };
+        },
         closeModal() {
             this.$emit('close');
-            this.resetFields();
-        },
-        submit() {
-            if (!this.itemName || !this.itemAmount || !this.itemSeason || !this.isWaterproof || !this.needsWash || !this.itemHeatPoints) {
-                alert('Please fill in all fields.');
-            } else {
-                this.$emit('submit', {itemName: this.itemName, itemAmount: this.itemAmount, itemSeason: this.itemSeason, itemWaterproof: this.isWaterproof, itemWash: this.needsWash, itemHeatPoints: this.itemHeatPoints});
-                this.closeModal();
+            if (!this.isEdit) {
+                console.log("in close: edit? " + this.isEdit);
+                this.resetFields();
             }
         },
+        submit() {
+            console.log("in submit");
+            if (!this.isEdit) {
+                if (!this.localItemInfo.itemName || !this.localItemInfo.itemAmount ||
+                    !this.localItemInfo.itemSeason || !this.localItemInfo.isWaterproof ||
+                    !this.localItemInfo.needsWash || !this.localItemInfo.itemHeatPoints) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+            } else {
+                if (!this.localItemInfo.itemName || !this.localItemInfo.itemAmount ||
+                    !this.localItemInfo.itemSeason || !this.localItemInfo.isWaterproof ||
+                    !this.localItemInfo.needsWash) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+            }
+
+            const itemToUpdate = { ...this.localItemInfo };
+            this.$emit('submit', itemToUpdate); // Emit the item data to be handled by the parent
+            this.closeModal();
+
+        }
+        ,
         resetFields() {
-            this.itemName = '';
-            this.itemAmount = '';
-            this.itemSeason = '';
-            this.isWaterproof = '';
-            this.needsWash = '';
-            this.itemHeatPoints = '';
+            this.localItemInfo = { ...this.itemInfo };
         }
     }
 };
@@ -111,7 +147,7 @@ export default {
     display: flex;
     align-items: center;
     gap: 10px;
-    
+
 }
 
 .modal-overlay {
@@ -185,6 +221,7 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
 select {
     padding: 5px;
     border: 1px solid #ccc;

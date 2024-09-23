@@ -10,7 +10,9 @@
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in shirt" :key="index" >{{ item }}</div>
+            <div class="item" v-for="(item, index) in shirt" :key="index">{{ item.itemName }}
+              <button @click="editItem(item)">Edit</button>
+            </div>
           </div>
         </div>
       </div>
@@ -123,7 +125,8 @@
         </div>
       </div>
     </div>
-    <AddItemModal :isVisible="modalVisible" isEdit="isItemEdit" @close="closeModal" @submit="addItemToCategory" />
+    <AddItemModal :isVisible="modalVisible" :isEdit="isItemEdit" :itemInfo="currentItemInfo" @close="closeModal"
+      @submit="addItemToCategory" />
   </div>
 </template>
 
@@ -148,7 +151,8 @@ export default {
       socks: [],
       modalVisible: false,
       isItemEdit: false,
-      currentCategory: ''
+      currentCategory: '',
+      currentItemInfo: '',
     };
   },
   methods: {
@@ -157,15 +161,45 @@ export default {
       this.modalVisible = true;
     },
     closeModal() {
+      this.isItemEdit = false;
       this.modalVisible = false;
     },
-    editItem() {
+    editItem(item) {
       this.isItemEdit = true;
+      this.currentItemInfo = item;
+      this.openModal(this.currentCategory);
     },
     addItemToCategory(itemInfo) {
-      if (this.currentCategory) {
-        this[this.currentCategory].push(itemInfo.itemName);
+
+      
+        //look for exsiting item in array to edit
+        const oldItemIndex = this[this.currentCategory].findIndex(item => item.itemName === itemInfo.itemName);
+      if (this.isItemEdit) {  
+        // If the item exists in array
+        if (oldItemIndex !== -1) {
+          //if the name is being replaced
+          if (this.currentItemInfo.itemName !== itemInfo.itemName) {
+            this[this.currentCategory].splice(oldItemIndex, 1); // Remove the old item
+            this[this.currentCategory].push(itemInfo); //insert the new item
+          } else {
+            //if name is kept the same but other fields are modified, then replace object info
+            this[this.currentCategory][oldItemIndex] = { ...itemInfo };
+          }
+        }
+
       }
+      else {
+        // If it doesn't exist, but has the same name as an existing item with the same name
+        if (oldItemIndex !== -1) {
+          alert('Item with this name exists, please use a different name');
+          return;
+        } else{
+          //new item is being added
+          this[this.currentCategory].push(itemInfo);
+        }
+        
+      }
+
       this.closeModal();
     }
   }
@@ -230,19 +264,23 @@ li {
 }
 
 
-.items-container { /* entire container for items in category*/
+.items-container {
+  /* entire container for items in category*/
   overflow-y: auto;
   max-height: 200px;
   padding: 5px 0;
 }
 
-.items-wrapper { /* row container for items in category*/
+.items-wrapper {
+  /* row container for items in category*/
   display: flex;
   flex-wrap: wrap;
 }
 
-.item { /* container of item itself*/
-  width: calc(20% - 10px); /* max width of 5 items per row*/
+.item {
+  /* container of item itself*/
+  width: calc(20% - 10px);
+  /* max width of 5 items per row*/
   margin: 5px;
   padding: 5px 10px;
   border: 1px solid #ddd;
