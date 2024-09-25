@@ -41,9 +41,8 @@
   }
   
   .heading {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: bold;
-    margin-left: 2%;
   }
   
   .user-profile .profile-pic {
@@ -59,7 +58,6 @@
 }
 
 .menu {
-  font-size: 16px;
   width: 66.66%;
   display: flex;
   justify-content: space-around;
