@@ -19,16 +19,16 @@
       data() {
       return {
         baseOutfit: {
-          shirt: '',
+          shirt: 'short sleeved shirt',
           pants: 'jeans',
-          shoes: 'sneakers',
+          shoes: 'tennis shoes',
           baseleg: '',
-          baseshirt: 't-shirt',
+          baseshirt: '',
           outershirt: '',
           outerleg: '',
           hat: '',
           gloves: '',
-          socks: 'ankle socks',
+          socks: 'tobilleras',
         }
       };
     },
