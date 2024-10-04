@@ -4,7 +4,9 @@
     <div class="main-layout">
       <div class="left-column">
         <div class="menu-container">
-          <WeatherPanel  />
+          <WeatherPanel iconPhrase="Sunny"
+           :avgTemperature="30" 
+           :avgPrecipitation="5"/>
         </div>
         <div class="extra-space">
         </div>
@@ -65,17 +67,17 @@ export default {
 <style scoped>
 .app-container {
   font-family: Arial, sans-serif;
-  padding: 0 5%;
+  padding: 0.5%;
 }
 
 .main-layout {
   display: flex;
-  margin-top: 20px;
+  margin-top: 1.25%;
 }
 
 .left-column {
   flex: 1;
-  padding-right: 20px;
+  padding-right: 10%;
   display: flex;
   flex-direction: column;
 }
