@@ -126,7 +126,7 @@
       </div>
     </div>
     <AddItemModal :isVisible="modalVisible" :isEdit="isItemEdit" :itemInfo="currentItemInfo" @close="closeModal"
-      @submit="addItemToCategory" />
+      @submit="addItemToCategory" @remove="removeItemFromCategory"/>
   </div>
 </template>
 
@@ -169,17 +169,21 @@ export default {
       this.currentItemInfo = item;
       this.openModal(this.currentCategory);
     },
+    removeItemFromCategory(itemInfo) {
+      const itemIndex = this[this.currentCategory].findIndex(item => item.itemName === itemInfo.itemName); //use item name to find item in array of category  
+      if (itemIndex !== -1) {
+            this[this.currentCategory].splice(itemIndex, 1); // remove the item from the category array
+        }
+    },
     addItemToCategory(itemInfo) {
-
-      
-        //look for exsiting item in array to edit
-        const oldItemIndex = this[this.currentCategory].findIndex(item => item.itemName === itemInfo.itemName);
-      if (this.isItemEdit) {  
+      //look for exsiting item in array to edit
+      const oldItemIndex = this[this.currentCategory].findIndex(item => item.itemName === itemInfo.itemName);
+      if (this.isItemEdit) {
         // If the item exists in array
         if (oldItemIndex !== -1) {
           //if the name is being replaced
           if (this.currentItemInfo.itemName !== itemInfo.itemName) {
-            this[this.currentCategory].splice(oldItemIndex, 1); // Remove the old item
+            this[this.currentCategory].splice(oldItemIndex, 1); // remove the old item
             this[this.currentCategory].push(itemInfo); //insert the new item
           } else {
             //if name is kept the same but other fields are modified, then replace object info
@@ -192,14 +196,15 @@ export default {
         // If it doesn't exist, but has the same name as an existing item with the same name
         if (oldItemIndex !== -1) {
           alert('Item with this name exists, please use a different name');
+
           return;
-        } else{
+        } else {
           //new item is being added
           this[this.currentCategory].push(itemInfo);
         }
-        
-      }
 
+      }
+      console.log("close modal in WardrobePanel");
       this.closeModal();
     }
   }

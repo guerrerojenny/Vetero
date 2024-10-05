@@ -2,8 +2,7 @@
     <div v-if="isVisible" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
-                <div class="title"></div>
-                <h2>Add Item</h2>
+                <h2 class="title">Add Item</h2>
                 <button class="close-button" @click="closeModal">X</button>
             </div>
             <div class="modal-body">
@@ -55,8 +54,9 @@
 
             </div>
             <div class="modal-footer">
-                <button @click="submit">Submit</button>
-            </div>
+               <button v-if="isEdit" class="remove-button" @click="remove">Remove Item</button>
+                <button @click="submit">Submit</button></div>
+                
         </div>
     </div>
 </template>
@@ -80,14 +80,13 @@ export default {
     },
     data() {
         return {
-            localItemInfo: this.isEdit ? { ...this.itemInfo } : this.getDefaultItemInfo(), 
+            localItemInfo: this.isEdit ? { ...this.itemInfo } : this.getDefaultItemInfo(),
             amountNumbers: Array.from({ length: 15 }, (_, i) => i + 1),
             heatPointsNumbers: Array.from({ length: 7 }, (_, i) => i + 1)
         };
     }, watch: {
         isVisible(newVal) {
             if (newVal) {
-                console.log("in watch isEdit: "+ this.isEdit);
                 this.localItemInfo = this.isEdit ? { ...this.itemInfo } : this.getDefaultItemInfo(); // Reset based on isEdit
             }
         }
@@ -106,12 +105,13 @@ export default {
         closeModal() {
             this.$emit('close');
             if (!this.isEdit) {
-                console.log("in close: edit? " + this.isEdit);
                 this.resetFields();
             }
         },
+        remove() {
+            this.$emit('remove', this.localItemInfo);
+        },
         submit() {
-            console.log("in submit");
             if (!this.isEdit) {
                 if (!this.localItemInfo.itemName || !this.localItemInfo.itemAmount ||
                     !this.localItemInfo.itemSeason || !this.localItemInfo.isWaterproof ||
@@ -129,8 +129,8 @@ export default {
             }
 
             const itemToUpdate = { ...this.localItemInfo };
-            this.$emit('submit', itemToUpdate); // Emit the item data to be handled by the parent
-            this.closeModal();
+            this.$emit('submit', itemToUpdate); 
+            console.log("close modal in AddItemModal")
 
         }
         ,
@@ -180,7 +180,7 @@ export default {
 
 .title {
     display: flex;
-    align-items: center;
+    margin-left: 145px;
 }
 
 .close-button {
@@ -189,6 +189,7 @@ export default {
     font-size: 20px;
     cursor: pointer;
     background-color: #4CAF50;
+    width: 40px;
 }
 
 .modal-body {
@@ -207,6 +208,21 @@ export default {
     display: flex;
     justify-content: flex-end;
     margin-top: 15px;
+    width: 100%;
+}
+
+.remove-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    margin-right: 238px;
+}
+
+.remove-button:hover {
+    background-color: #d32f2f;
 }
 
 button {
@@ -227,6 +243,5 @@ select {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-}
-</style>
+}</style>
   
