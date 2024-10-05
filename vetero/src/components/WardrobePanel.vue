@@ -20,11 +20,12 @@
       <div class="box">
         <div class="box-header">
           <h2>Pants</h2>
-          <button @click="addItem('pants')">+</button>
+          <button @click="openModal('pants')">+</button>
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in pants" :key="index">{{ item }}</div>
+            <div class="item" v-for="(item, index) in pants" :key="index">{{ item.itemName }}
+              <button @click="editItem(item)">Edit</button></div>
           </div>
         </div>
       </div>
@@ -32,11 +33,12 @@
       <div class="box">
         <div class="box-header">
           <h2>Socks</h2>
-          <button @click="addItem('socks')">+</button>
+          <button @click="openModal('socks')">+</button>
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in socks" :key="index">{{ item }}</div>
+            <div class="item" v-for="(item, index) in socks" :key="index">{{ item.itemName }}
+              <button @click="editItem(item)">Edit</button></div>
           </div>
         </div>
       </div>
@@ -44,11 +46,12 @@
       <div class="box">
         <div class="box-header">
           <h2>Shoes</h2>
-          <button @click="addItem('shoes')">+</button>
+          <button @click="openModal('shoes')">+</button>
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in shoes" :key="index">{{ item }}</div>
+            <div class="item" v-for="(item, index) in shoes" :key="index">{{ item.itemName }}
+              <button @click="editItem(item)">Edit</button></div>
           </div>
         </div>
       </div>
@@ -56,11 +59,12 @@
       <div class="box">
         <div class="box-header">
           <h2>Jackets</h2>
-          <button @click="addItem('outershirt')">+</button>
+          <button @click="openModal('outershirt')">+</button>
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in outershirt" :key="index">{{ item }}</div>
+            <div class="item" v-for="(item, index) in outershirt" :key="index">{{ item.itemName }}
+              <button @click="editItem(item)">Edit</button></div>
           </div>
         </div>
       </div>
@@ -68,11 +72,12 @@
       <div class="box">
         <div class="box-header">
           <h2>Hats</h2>
-          <button @click="addItem('hat')">+</button>
+          <button @click="openModal('hat')">+</button>
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in hat" :key="index">{{ item }}</div>
+            <div class="item" v-for="(item, index) in hat" :key="index">{{ item.itemName }}
+              <button @click="editItem(item)">Edit</button></div>
           </div>
         </div>
       </div>
@@ -80,11 +85,12 @@
       <div class="box">
         <div class="box-header">
           <h2>Gloves</h2>
-          <button @click="addItem('gloves')">+</button>
+          <button @click="openModal('gloves')">+</button>
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in gloves" :key="index">{{ item }}</div>
+            <div class="item" v-for="(item, index) in gloves" :key="index">{{ item.itemName }}
+              <button @click="editItem(item)">Edit</button></div>
           </div>
         </div>
       </div>
@@ -92,11 +98,12 @@
       <div class="box">
         <div class="box-header">
           <h2>Base Shirts</h2>
-          <button @click="addItem('baseshirt')">+</button>
+          <button @click="openModal('baseshirt')">+</button>
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in baseshirt" :key="index">{{ item }}</div>
+            <div class="item" v-for="(item, index) in baseshirt" :key="index">{{ item.itemName }}
+              <button @click="editItem(item)">Edit</button></div>
           </div>
         </div>
       </div>
@@ -104,11 +111,12 @@
       <div class="box">
         <div class="box-header">
           <h2>Base Legs</h2>
-          <button @click="addItem('baseleg')">+</button>
+          <button @click="openModal('baseleg')">+</button>
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in baseleg" :key="index">{{ item }}</div>
+            <div class="item" v-for="(item, index) in baseleg" :key="index">{{ item.itemName }}
+              <button @click="editItem(item)">Edit</button></div>
           </div>
         </div>
       </div>
@@ -116,11 +124,12 @@
       <div class="box">
         <div class="box-header">
           <h2>Outer Pants</h2>
-          <button @click="addItem('outerleg')">+</button>
+          <button @click="openModal('outerleg')">+</button>
         </div>
         <div class="items-container">
           <div class="items-wrapper">
-            <div class="item" v-for="(item, index) in outerleg" :key="index">{{ item }}</div>
+            <div class="item" v-for="(item, index) in outerleg" :key="index">{{ item.itemName }}
+              <button @click="editItem(item)">Edit</button></div>
           </div>
         </div>
       </div>
