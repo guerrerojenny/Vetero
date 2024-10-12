@@ -35,7 +35,7 @@ getIcon(iconPhrase) {
    switch (iconPhrase) {
       case 'Sunny':
       case 'Mostly Sunny':
-          return require('@/assets/Sunny.svg');
+          return require('@/assets/sunny.svg');
       case 'Partly Sunny':
       case 'Intermittent Clouds':
       case 'Hazy Sunshine':
@@ -55,7 +55,7 @@ getIcon(iconPhrase) {
         return require('@/assets/sunny-rainy.svg');
       case 'T-Storms':
       case 'Mostly Cloudy w/ T-Storms':
-        return require('@/assets/Storm.svg');
+        return require('@/assets/storm.svg');
       case 'Partly Sunny w/ T-Storms': 
         return require('@/assets/sunny-storm.svg');
       case 'Flurries':
@@ -66,7 +66,7 @@ getIcon(iconPhrase) {
       case 'Ice':
       case 'Sleet':
       case 'Rain and Snow':
-        return require('@/assets/Snow.svg');
+        return require('@/assets/snow.svg');
       default:
         return require('@/assets/sunny-storm-wind.svg');  // Fallback for unknown phrases
       }
