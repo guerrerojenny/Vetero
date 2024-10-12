@@ -1,8 +1,9 @@
 <template>
   <div class="app-container">
-    <PageHeader @menu-selected="updateContent"/>
+    <PageHeader v-if="isLoggedIn" @menu-selected="updateContent"/> <!--render header if isLoggedIn is true-->
+    <LoginPage v-else @login-success="handleLogin" /> <!--render login page if isLoggedIn is false-->
     <div class="main-layout">
-      <div class="left-column">
+      <div class="left-column" v-if="isLoggedIn"> <!--render what is inside main layout if isLoggedIn is true-->
         <div class="menu-container">
           <WeatherPanel iconPhrase="Sunny"
            :avgTemperature="30" 
@@ -14,7 +15,7 @@
       <div class="right-column">
         <component :is="currentComponent" />
       </div>
-    </div>
+    </div>   
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import WeatherPanel from './components/WeatherPanel.vue';
 import WardrobePanel from './components/WardrobePanel.vue';
 import OutfitPanel from './components/OutfitPanel.vue';
 import FeedbackPanel from './components/FeedbackPanel.vue';
+import LoginPage from './components/LoginPage.vue'; 
 
 
 export default {
@@ -32,15 +34,18 @@ export default {
     WeatherPanel,
     WardrobePanel,
     FeedbackPanel,
-    OutfitPanel
+    OutfitPanel,
+    LoginPage
   },
   data() {
     return {
-      selectedContent: 'Outfit of the day'
+      selectedContent: 'Outfit of the day',
+      isLoggedIn: false //isLoggedIn is set to false by default (can change this based on cookie?)
     };
   },
   computed: {
     currentComponent() {
+      if (!this.isLoggedIn) return null;
       switch (this.selectedContent) {
         case 'Outfit of the day':
           return 'OutfitPanel';
@@ -56,6 +61,9 @@ export default {
   methods: {
     updateContent(content) {
       this.selectedContent = content;
+    },
+    handleLogin() {
+      this.isLoggedIn = true; // isLoggedIn is set to true as response to LoginPage emitting 'login-success'
     }
   }
 };
