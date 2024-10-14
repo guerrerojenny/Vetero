@@ -2,8 +2,8 @@
   <div class="app-container">
     <PageHeader v-if="isLoggedIn" @menu-selected="updateContent"/> <!--render header if isLoggedIn is true-->
     <LoginPage v-else @login-success="handleLogin" /> <!--render login page if isLoggedIn is false-->
-    <div class="main-layout">
-      <div class="left-column" v-if="isLoggedIn"> <!--render what is inside main layout if isLoggedIn is true-->
+    <div class="main-layout" v-if="isLoggedIn"><!--render what is inside main layout if isLoggedIn is true-->
+      <div class="left-column" v-if="isLoggedIn"> 
         <div class="menu-container">
           <WeatherPanel iconPhrase="Sunny"
            :avgTemperature="30" 

@@ -4,7 +4,11 @@
       <form @submit.prevent="login">
         <input v-model="email" placeholder="Email" required />
         <input v-model="password" type="password" placeholder="Password" required />
-        <button type="submit">Login</button>
+        
+        <div>
+          <button type="login">Login</button>
+          <button type="sugnup">Sign Up</button>
+        </div>
       </form>
     </div>
   </template>
@@ -19,16 +23,34 @@
     },
     methods: {
       login() {
-        // add your login logic (e.g., API call)
+        // add login logic (e.g., API call)
         this.$emit('login-success');
       }
     }
   };
   </script>
   
+
   <style scoped>
 
-
-
-</style>
+  .login-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  .linput-fields{
+      display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .buttons{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  </style>
   
