@@ -16,14 +16,22 @@
                         <option v-for="n in amountNumbers" :key="n" :value="n">{{ n }}</option>
                     </select>
                 </div>
-                <div class="classification"><label for="season">Season:</label>
-                    <select v-model="localItemInfo.itemSeason">
-                        <option disabled value="">Please select one</option>
-                        <option>Spring</option>
-                        <option>Summer</option>
-                        <option>Fall</option>
-                        <option>Winter</option>
-                    </select>
+
+                <div class="classification"><label>Season:</label>
+                    <div>
+                        <label for="summer">
+                            <input type="checkbox" id="summer" value="Summer" v-model="localItemInfo.itemSeason" />
+                            Summer
+                        </label>
+                        <label for="springautum">
+                            <input type="checkbox" id="springautum" value="SpringAutum" v-model="localItemInfo.itemSeason" />
+                            Spring/Autum
+                        </label>
+                        <label for="winter">
+                            <input type="checkbox" id="winter" value="Winter" v-model="localItemInfo.itemSeason" />
+                            Winter
+                        </label>
+                    </div>
                 </div>
                 <div class="classification"><label>Waterproof:</label>
                     <div class="checkbox-group">
@@ -54,9 +62,10 @@
 
             </div>
             <div class="modal-footer">
-               <button v-if="isEdit" class="remove-button" @click="remove">Remove Item</button>
-                <button @click="submit">Submit</button></div>
-                
+                <button v-if="isEdit" class="remove-button" @click="remove">Remove Item</button>
+                <button @click="submit">Submit</button>
+            </div>
+
         </div>
     </div>
 </template>
@@ -71,7 +80,7 @@ export default {
             default: () => ({
                 itemName: '',
                 itemAmount: '',
-                itemSeason: '',
+                itemSeason: [],
                 itemWaterproof: '',
                 itemWash: '',
                 itemHeatPoints: ''
@@ -96,7 +105,7 @@ export default {
             return {
                 itemName: '',
                 itemAmount: '',
-                itemSeason: '',
+                itemSeason: [],
                 isWaterproof: '',
                 needsWash: '',
                 itemHeatPoints: ''
@@ -129,7 +138,7 @@ export default {
             }
 
             const itemToUpdate = { ...this.localItemInfo };
-            this.$emit('submit', itemToUpdate); 
+            this.$emit('submit', itemToUpdate);
             console.log("close modal in AddItemModal")
 
         }
@@ -243,5 +252,6 @@ select {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-}</style>
+}
+</style>
   
