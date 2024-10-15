@@ -1,8 +1,8 @@
 <template>
-    <div class="outfit-content">
-      <h1>Outfit Details</h1>
-      <div class="grid">
-        <div v-for="(value, key) in outputOutfit()" :key="key" class="item">
+  <div class="outfit-content" >
+    <h1>Outfit Details</h1>
+    <div v-if=outputOutfit() class="outfit">
+      <div v-for="(value, key) in outfit" :key="key" class="item">
         <div class="category">
           {{ key }}
         </div>
@@ -10,34 +10,45 @@
           {{ value }}
         </div>
       </div> 
-    </div>   
+    </div> 
+    <div v-else class="no-outfit">
+      <h1>No Outfit for Today</h1>
+      <h2>Make sure you have added clothes to your wardrobe</h2>
+    </div>  
   </div>
-  </template>
+</template>
   
   <script>
   export default {
       data() {
       return {
+        isEmpty: false,
         baseOutfit: {
-          shirt: 'short sleeved shirt',
-          pants: 'jeans',
-          shoes: 'tennis shoes',
-          baseleg: '',
-          baseshirt: '',
-          outershirt: '',
-          outerleg: '',
-          hat: '',
-          gloves: '',
-          socks: 'tobilleras',
-        }
+          'shirt': 'none',
+          'pants': 'none',
+          'shoes': 'none',
+          'baseleg': 'none',
+          'baseshirt': 'none',
+          'outershirt': 'none',
+          'outerleg': 'none',
+          'hat': 'none',
+          'gloves': 'none',
+          'socks': 'none',
+        },
+        outfit: null
       };
     },
     methods:{
       outputOutfit(){
-        return Object.fromEntries(
-          Object.entries(this.baseOutfit).filter(([, value]) => value !== '')
+        this.outfit =  Object.fromEntries(
+          Object.entries(this.baseOutfit).filter(([, value]) => value !== 'none')
         );
+        if(Object.keys(this.outfit).length == 0){
+          return false
+        }
+        return true;
       }
+
     },
     name: 'OutfitPanel'
   };
@@ -49,7 +60,7 @@
   padding: 20px;
 }
 
-.grid {
+.outfit {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px; 
