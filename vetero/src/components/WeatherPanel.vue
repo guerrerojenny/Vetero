@@ -1,13 +1,12 @@
 <template>
 <div class="weather-panel">
   <h1>Today's Weather</h1>
-  <h1>{{ AverageTemp }}</h1>
-  <img :src="getIcon(iconPhrase)" alt="Weather Icon" class="weather-icon" />
-  <p class="descriptive-text">{{ iconPhrase }}</p>
+  <img :src="getIcon(weather.iconPhrase)" alt="Weather Icon" class="weather-icon" />
+  <p class="descriptive-text">{{ weather.iconPhrase }}</p>
   <p class="descriptive-text">Average Temperature:</p>
-  <h1 class="main-number">{{ avgTemperature }}</h1>
+  <h1 class="main-number">{{ weather.avgTemperature }}</h1>
   <p class="descriptive-text">Precipitation Probability:</p>
-  <h1 class="secondary-number"> {{ avgPrecipitation }}%</h1>
+  <h1 class="secondary-number"> {{ weather.avgPrecipitation }}%</h1>
 
 </div>
 </template>
@@ -16,18 +15,10 @@
 export default {
 
 props: {
-  iconPhrase: {
-    type: String,
+  weather:{
+    type: Object,
     required: true
-  },
-  avgTemperature: {
-    type: Number,
-    required: true,
-  },
-  avgPrecipitation: {
-    type: Number,
-    required: true,
-  },
+  }
 },
 
 methods: {
@@ -81,7 +72,7 @@ getIcon(iconPhrase) {
 
 width: 90%;
 height: 90%;
-margin-top: -30%;
+margin-top: -15%;
 margin-bottom: -15%;
 }
 .weather-panel{
