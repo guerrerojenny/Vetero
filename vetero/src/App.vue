@@ -1,17 +1,16 @@
 <template>
   <div class="app-container">
-    <PageHeader v-if="isLoggedIn" @menu-selected="updateContent"/> <!--render header if isLoggedIn is true-->
+    <PageHeader v-if="isLoggedIn" @tab-selected="updateContent"/> <!--render header if isLoggedIn is true-->
     <LoginPage v-else @login-success="handleLogin" /> <!--render login page if isLoggedIn is false-->
     <div class="main-layout" v-if="isLoggedIn"><!--render what is inside main layout if isLoggedIn is true-->
       <div class="left-column" v-if="isLoggedIn"> 
         <div class="menu-container">
-          <WeatherPanel iconPhrase="Sunny"
-           :avgTemperature="30" 
-           :avgPrecipitation="5"/>
+          <WeatherPanel :weather="weatherData"></WeatherPanel>
         </div>
         <div class="extra-space">
         </div>
       </div>
+      <!--Outfit content: Wardrobe, Outfit of the Day, Feedback-->
       <div class="right-column">
         <component :is="currentComponent" />
       </div>
@@ -39,8 +38,13 @@ export default {
   },
   data() {
     return {
-      selectedContent: 'Outfit of the day',
-      isLoggedIn: false //isLoggedIn is set to false by default (can change this based on cookie?)
+      selectedContent: 'Feedback',
+      isLoggedIn: false, //isLoggedIn is set to false by default (can change this based on cookie?)
+      weatherData: {
+        iconPhrase: "Sunny",
+        avgTemperature: "50",
+        avgPrecipitation: "5"
+      }
     };
   },
   computed: {

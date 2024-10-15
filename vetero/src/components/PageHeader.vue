@@ -25,7 +25,7 @@
   export default {
     methods: {
       selectContent(content) {
-        this.$emit('menu-selected', content);
+        this.$emit('tab-selected', content);
       }
     }
   };
@@ -80,5 +80,19 @@
   font-weight: bold;
   border-bottom: 2px solid #000;
 }
+
+.primary{
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
   </style>
   
