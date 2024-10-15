@@ -61,6 +61,14 @@ export default {
 </script>
   
 <style scoped>
+
+.feedback-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .comfort-panel {
   display: flex;
   align-items: center;
@@ -69,7 +77,7 @@ export default {
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   border-radius: 8px;
-  width: 300px;
+  width: 90%;
 }
 
 .inner-panel {
@@ -105,9 +113,9 @@ h3 {
 }
 
 .comfort-button img {
-  width: 30px;
-  height: 30px;
-  margin-bottom: 5px;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 25%;
 }
 
 .submit-button {
