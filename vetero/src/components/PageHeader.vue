@@ -15,17 +15,35 @@
         </div>
       </div>
       <div class="user-profile">
-        <img class="profile-pic" src="https://via.placeholder.com/50" alt="User Profile">
+        <img class="profile-pic" @click="openProfileOptions" src="https://via.placeholder.com/50" alt="User Profile">
       </div>
     </header>
+    <div v-if = "visibleMenu" class="profileMenu">
+      <p class="menuOption" @click="switchToAccountPage">Account</p>
+      <button class="logOut" @click="logOut">Log Out</button>
+    </div>
   </template>
   
   <script>
  
   export default {
+    data(){
+      return{
+        visibleMenu: false
+      }
+    },
     methods: {
       selectContent(content) {
         this.$emit('tab-selected', content);
+      },
+      openProfileOptions(){
+        this.visibleMenu = !this.visibleMenu;
+      },
+      switchToAccountPage(){
+        console.log("Switch to account page!");
+      },
+      logOut(){
+        this.$emit('logOut', false);
       }
     }
   };
@@ -69,16 +87,17 @@
   cursor: pointer;
   margin: 0;
   padding: 10px 20px;
-  color: #333;
+  color: gray;
 }
 
 .menu p:hover {
-  background-color: #e0e0e0;
+  color:#333;
+  text-decoration: underline;
 }
 
-.menu p.active {
-  font-weight: bold;
-  border-bottom: 2px solid #000;
+.menu p:active{
+  color:#333;
+  text-decoration: underline;
 }
 
 .primary{
@@ -90,8 +109,40 @@
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #45a049;
+.profileMenu{
+  position: fixed;
+  right: 0;
+  padding: 2%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  height: 15%;
+  width: 10%;
+  background-color: azure;
+}
+
+.logOut{
+  margin-top: 20%;
+  margin-bottom: 10%;
+  background-color:#ff5f62cb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logOut:hover{
+  background-color:#ff3c3f;
+}
+
+.menuOption{
+  color: gray;
+}
+
+.menuOption:hover{
+  color:#333;
+  text-decoration: underline;
 }
 
   </style>
