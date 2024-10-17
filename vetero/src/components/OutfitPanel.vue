@@ -1,5 +1,8 @@
 <template>
-  <div class="outfit-content" >
+  <div v-if="feedbackNeeded">
+    <FeedbackPanel @feedbackSubmitted="closeFeedbackPanel"></FeedbackPanel>
+  </div>
+  <div v-else class="outfit-content" >
     <h1>Outfit Details</h1>
     <div v-if=outputOutfit() class="outfit">
       <div v-for="(value, key) in outfit" :key="key" class="item">
@@ -19,9 +22,16 @@
 </template>
   
   <script>
+  import FeedbackPanel from './FeedbackPanel.vue';
+
   export default {
-      data() {
+    components: {
+      FeedbackPanel
+    },
+
+    data() {
       return {
+        feedbackNeeded: true,
         isEmpty: false,
         baseOutfit: {
           'shirt': 'none',
@@ -47,6 +57,10 @@
           return false
         }
         return true;
+      },
+      closeFeedbackPanel(){
+        console.log("close panel!");
+        this.feedbackNeeded = false;
       }
 
     },

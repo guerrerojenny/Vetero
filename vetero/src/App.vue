@@ -23,7 +23,6 @@ import PageHeader from './components/PageHeader.vue';
 import WeatherPanel from './components/WeatherPanel.vue';
 import WardrobePanel from './components/WardrobePanel.vue';
 import OutfitPanel from './components/OutfitPanel.vue';
-import FeedbackPanel from './components/FeedbackPanel.vue';
 import LoginPage from './components/LoginPage.vue'; 
 
 
@@ -32,13 +31,12 @@ export default {
     PageHeader,
     WeatherPanel,
     WardrobePanel,
-    FeedbackPanel,
     OutfitPanel,
     LoginPage
   },
   data() {
     return {
-      selectedContent: 'Feedback',
+      selectedContent: 'OutfitPanel',
       isLoggedIn: false, //isLoggedIn is set to false by default (can change this based on cookie?)
       weatherData: {
         iconPhrase: "Sunny",

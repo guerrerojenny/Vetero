@@ -9,9 +9,11 @@
           <p 
             :class="{ active: selectedTab === 'Wardrobe' }"
             @click="selectContent('Wardrobe')">Wardrobe</p>
+           <!-- 
           <p 
             :class="{ active: selectedTab === 'Feedback' }"
             @click="selectContent('Feedback')">Feedback</p>
+        -->
         </div>
       </div>
       <div class="user-profile">

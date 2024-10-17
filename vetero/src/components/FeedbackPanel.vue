@@ -1,7 +1,6 @@
 <template>
-    <div class="feedback-content">
-      <h2>Feedback</h2>
-      <div class="comfort-panel" v-if="!feedbackSubmitted">
+    <div class="feedback-modal">
+      <div class="comfort-panel">
         <div class="inner-panel">
           <h3>How comfortable was your outfit on {{date}}</h3>
           <div class="options">
@@ -15,12 +14,11 @@
               <span>{{ option.label }}</span>
             </button>
           </div>
-          <button class="submit-button" :disabled="!selectedOption" @click="submitFeedback">Submit</button>
+          <div class="buttons">
+            <button class="skip-button"  @click="submitFeedback">Skip Feedback</button>
+            <button class="submit-button" :disabled="!selectedOption" @click="submitFeedback">Submit</button>
+          </div>
         </div>
-      </div>
-
-      <div v-else class="feedback-message">
-        Feedback submitted successfully!
       </div>
     </div>
   </template>
@@ -36,9 +34,9 @@ export default {
   data() {
     return {
       comfortOptions: [
-        { value: 'too-cold', label: 'Too Cold', icon: 'too-cold.svg' },
-        { value: 'just-right', label: 'Just Right', icon: 'just-right.svg' },
-        { value: 'too-hot', label: 'Too Hot', icon: 'too-hot.svg' },
+        { value: 'too-cold', label: 'Too Cold', icon: 'too-cold.svg', response: -1 },
+        { value: 'just-right', label: 'Just Right', icon: 'just-right.svg', response: 0 },
+        { value: 'too-hot', label: 'Too Hot', icon: 'too-hot.svg', response: 1 }
       ],
       selectedOption: null,
       feedbackSubmitted: false,
@@ -49,7 +47,8 @@ export default {
       this.selectedOption = option;
     },
     submitFeedback() {
-      this.feedbackSubmitted = true;
+      console.log("Feedback submitted!");
+      this.$emit('feedbackSubmitted', true);
     },
     getIcon(icon) {
       return require(`@/assets/${icon}`);
@@ -62,7 +61,16 @@ export default {
   
 <style scoped>
 
-.feedback-content{
+.feedback-modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,11 +81,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   border-radius: 8px;
-  width: 90%;
+  width: 50%;
+  height: 40%;
 }
 
 .inner-panel {
@@ -128,9 +136,29 @@ h3 {
   transition: background-color 0.3s;
 }
 
+.skip-button {
+  padding: 5px 10px;
+  background-color: #39a7f1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+
+.skip-button:hover {
+  background-color: #086aac;
+}
+
+
 .submit-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.submit-button:enabled:hover{
+  background-color: #186f1b;
 }
 
 .feedback-message {
@@ -145,6 +173,11 @@ h3 {
   text-align: center;
   color: #4caf50;
   font-weight: bold;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
 }
 </style>
   
