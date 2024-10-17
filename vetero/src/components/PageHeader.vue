@@ -144,7 +144,6 @@
 
 .menuOption:hover{
   color:#333;
-  text-decoration: underline;
 }
 
   </style>
