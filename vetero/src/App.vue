@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <PageHeader v-if="isLoggedIn" @tab-selected="updateContent" @logOut="handleLogOut"/> <!--render header if isLoggedIn is true-->
+    <PageHeader v-if="isLoggedIn" @tab-selected="updateContent" @logOut="handleLogOut" @accountSettings="updateContent"/> <!--render header if isLoggedIn is true-->
     <LoginPage v-else @login-success="handleLogin" /> <!--render login page if isLoggedIn is false-->
     <div class="main-layout" v-if="isLoggedIn"><!--render what is inside main layout if isLoggedIn is true-->
       <div class="left-column" v-if="isLoggedIn"> 
@@ -24,7 +24,7 @@ import WeatherPanel from './components/WeatherPanel.vue';
 import WardrobePanel from './components/WardrobePanel.vue';
 import OutfitPanel from './components/OutfitPanel.vue';
 import LoginPage from './components/LoginPage.vue'; 
-
+import AccountSettings from './components/AccountSettings.vue'; 
 
 export default {
   components: {
@@ -32,7 +32,8 @@ export default {
     WeatherPanel,
     WardrobePanel,
     OutfitPanel,
-    LoginPage
+    LoginPage,
+    AccountSettings
   },
   data() {
     return {
@@ -55,6 +56,8 @@ export default {
           return 'WardrobePanel';
         case 'Feedback':
           return 'FeedbackPanel';
+        case 'Account':
+          return 'AccountSettings';
         default:
           return null;
       }
@@ -62,7 +65,11 @@ export default {
   },
   methods: {
     updateContent(content) {
+      if (content === 'AccountSettings') {
+      this.selectedContent = 'Account'; 
+    } else {
       this.selectedContent = content;
+    }
     },
     handleLogin() {
       this.isLoggedIn = true; // isLoggedIn is set to true as response to LoginPage emitting 'login-success'

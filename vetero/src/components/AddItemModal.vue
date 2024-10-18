@@ -91,7 +91,7 @@ export default {
         return {
             localItemInfo: this.isEdit ? { ...this.itemInfo } : this.getDefaultItemInfo(),
             amountNumbers: Array.from({ length: 15 }, (_, i) => i + 1),
-            heatPointsNumbers: Array.from({ length: 7 }, (_, i) => i + 1)
+            heatPointsNumbers: Array.from({ length: 7 }, (_, i) => i)
         };
     }, watch: {
         isVisible(newVal) {

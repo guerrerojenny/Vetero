@@ -21,7 +21,7 @@
       </div>
     </header>
     <div v-if = "visibleMenu" class="profileMenu">
-      <p class="menuOption" @click="switchToAccountPage">Account</p>
+      <p class="menuOption" @click="handleAccountClick">Account</p>
       <button class="logOut" @click="logOut">Log Out</button>
     </div>
   </template>
@@ -41,9 +41,10 @@
       openProfileOptions(){
         this.visibleMenu = !this.visibleMenu;
       },
-      switchToAccountPage(){
-        console.log("Switch to account page!");
-      },
+      handleAccountClick() {
+      this.selectContent('Account'); // Adjust if needed
+      this.$emit('accountSettings', 'AccountSettings');
+    },
       logOut(){
         this.$emit('logOut', false);
       }
