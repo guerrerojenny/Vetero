@@ -95,12 +95,10 @@
 
 .menu p:hover {
   color:#333;
-  text-decoration: underline;
 }
 
 .menu p:active{
   color:#333;
-  text-decoration: underline;
 }
 
 .primary{
