@@ -2,7 +2,7 @@
     <div class="feedback-modal">
       <div class="comfort-panel">
         <div class="inner-panel">
-          <h3>How comfortable was your outfit on {{date}}</h3>
+          <h3>How comfortable was your outfit on 10/17/2024{{date}}</h3>
           <div class="options">
             <button 
               v-for="option in comfortOptions" 

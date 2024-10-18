@@ -41,7 +41,7 @@ export default {
       isLoggedIn: false, //isLoggedIn is set to false by default (can change this based on cookie?)
       weatherData: {
         iconPhrase: "Sunny",
-        avgTemperature: "50",
+        avgTemperature: "21°C",
         avgPrecipitation: "5"
       }
     };

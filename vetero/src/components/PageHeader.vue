@@ -121,7 +121,7 @@
   flex-direction: column;
   height: 15%;
   width: 10%;
-  background-color: azure;
+  background-color: white;
 }
 
 .logOut{
